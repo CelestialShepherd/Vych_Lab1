@@ -1,0 +1,46 @@
+#include "mbed.h"
+
+InterruptIn btn1(D4);
+InterruptIn btn2(D5);
+DigitalOut led1(A0);
+DigitalOut led2(A1);
+DigitalOut led3(A2);
+DigitalOut led4(A3);
+DigitalOut led5(A4);
+
+void btn1Pressed(){
+    
+    }
+void btn2Pressed(){
+    
+    }
+void action(int pp){
+        led3 = 1;
+        wait(1.0f/(2.0f*pp));
+        led2 = 1;
+        led4 = 1;
+        wait(1.0f/(2.0f*pp));
+        led1 = 1;
+        led5 = 1;
+        wait(1.0f/(2.0f*pp));
+        led1 = 0;
+        led5 = 0;
+        wait(1.0f/(2.0f*pp));
+        led2 = 0;
+        led4 = 0;
+        wait(1.0f/(2.0f*pp));
+        led3 = 0;
+        wait(1.0f/(2.0f*pp));   
+    }
+
+int main(){
+    int pp = 1;
+    btn1.mode(PullUp);
+    btn2.mode(PullUp);
+    btn1.fall(&btn1Pressed);
+    btn2.fall(&btn2Pressed);
+    while(1)
+    {
+         action(pp);
+    }
+}
